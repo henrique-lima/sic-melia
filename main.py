@@ -2,6 +2,7 @@ import pprint
 import sys
 import spotipy
 import spotipy.util as util
+import mel
 
 from track import Track
 from spotify_utils import Spotify_Utils
@@ -22,10 +23,12 @@ for event in events:
 	event_artist = spot_utils.search_artist(event.title)
 
 	if event_artist is None:
-		event_title = event.title.split(" ")[0]
-		event_artist = spot_utils.search_artist(event_title)
-	
-		if event_artist is not None:
+		event_title = event.title
+                mel_artists = mel.get_artists(event_title)
+                for event_title in mel_artists:
+                    event_artist = spot_utils.search_artist(event_title)
+
+		    if event_artist is not None:
 			event_artists.append(event_artist)
 			print('-' + event_artist.name)
 
