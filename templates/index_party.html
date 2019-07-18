@@ -29,7 +29,7 @@
   			
         $.ajax({
                type: "GET",
-               url: "http://localhost:5000/events",
+               url: "http://localhost:5000/api/events",
                crossDomain: true,
                success: function(returnValue){
                     var events = $.parseJSON(returnValue);
@@ -41,6 +41,8 @@
                       
                       var pos = {lat: x, lng: y};
                       var marker = new google.maps.Marker({position: pos, map: map});
+
+                      console.log(ev);
 
                       var label = '<div id="content">' +
                         '<h1 id="firstHeading" class="firstHeading">' + ev.title + '</h1>' +

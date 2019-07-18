@@ -1,0 +1,75 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Welcome to Melia</title>
+  <meta name="description" content="Welcome to Melia">
+  <style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 800px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+	  <h3>Rohit, here are some suggestions for you...</h3>
+    
+    <div id="map"></div>
+    <script>
+
+		function initMap() {
+  			var bcn = {lat: 41.3869891, lng: 2.1638362};
+        var api_key = 'AIzaSyCZT8Ai4KniCOkM6VBcku_XvjD3SpRRbFc';
+
+  			var map = new google.maps.Map(
+  				document.getElementById('map'), {zoom: 14, center: bcn});
+  			
+        var request = {
+          type: 'park',
+          location: bcn,
+          radius: 10000,
+          fields: ['name', 'geometry'],
+        };
+
+        var service = new google.maps.places.PlacesService(map);
+
+        service.nearbySearch(request, function(results, status) {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            for (var i = 0; i < results.length; i++) {
+              console.log(results[i]);
+              var label = '<div id="content">' +
+                        '<h1 id="firstHeading" class="firstHeading">' + results[i].name + '</h1></div>';
+
+              createMarker(map, results[i], label);
+            }
+            map.setCenter(results[0].geometry.location);
+          }
+        });
+      }
+
+      function createMarker(map, place, label) {
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+        addEventLabel(marker, label);
+      }
+
+      function addEventLabel(marker, label) {
+          var infowindow = new google.maps.InfoWindow({ content: label });
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(marker.get('map'), marker);
+          });
+        }
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZT8Ai4KniCOkM6VBcku_XvjD3SpRRbFc&callback=initMap&libraries=places">
+    </script>
+</body>
+</html>
