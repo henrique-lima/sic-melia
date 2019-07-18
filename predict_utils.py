@@ -26,8 +26,9 @@ class Predict_Utils:
 			start = res['start']
 			end = res['end']
 			location = res['location']
+			address = res['entities'][0]['formatted_address']
 			state = res['state']
-			events.append(Event(id, title, category, labels, rank, start, end, location, state))
+			events.append(Event(id, title, category, labels, rank, start, end, location, address, state))
 
 		return events
 
