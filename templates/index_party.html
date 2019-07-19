@@ -17,16 +17,15 @@
 </head>
 
 <body>
-	  <h3>Rohit, here are some suggestions for you...</h3>
+    <h3>Rohit, here are some suggestions for you...</h3>
     
     <div id="map"></div>
     <script>
-
-		function initMap() {
-  			var bcn = {lat: 41.3869891, lng: 2.1638362};
-  			var map = new google.maps.Map(
-  				document.getElementById('map'), {zoom: 14, center: bcn});
-  			
+    function initMap() {
+        var bcn = {lat: 41.3869891, lng: 2.1638362};
+        var map = new google.maps.Map(
+          document.getElementById('map'), {zoom: 14, center: bcn});
+        
         $.ajax({
                type: "GET",
                url: "http://localhost:5000/api/events",
@@ -41,9 +40,6 @@
                       
                       var pos = {lat: x, lng: y};
                       var marker = new google.maps.Marker({position: pos, map: map});
-
-                      console.log(ev);
-
                       var label = '<div id="content">' +
                         '<h1 id="firstHeading" class="firstHeading">' + ev.title + '</h1>' +
                         '<p><b>' + ev.address + '</b></p>' +
@@ -56,7 +52,6 @@
                     // console.log(request, error);
                 }
         });
-
         function addEventLabel(marker, label) {
           var infowindow = new google.maps.InfoWindow({ content: label });
           google.maps.event.addListener(marker, 'click', function() {
@@ -64,25 +59,22 @@
           });
         }
       }
-
-  // 	 		var request = {
-  //    			location: bcn,
-  //    			type: ['restaurant']};
-
-		// 	infowindow = new google.maps.InfoWindow();
-		// 	places = new google.maps.places.PlacesService(map);
-		// 	places.nearbySearch(request, callback);
-		// }
-
-		// function callback(results, status) {
-  // 			if (status == google.maps.places.PlacesServiceStatus.OK) {
-  //   			for (var i = 0; i < results.length; i++) {
-  //     				var place = results[i];
-  //     				alert(place);
-  //     				createMarker(results[i]);
-  //   			}
-  //   		}
-  // 		}
+  //      var request = {
+  //          location: bcn,
+  //          type: ['restaurant']};
+    //  infowindow = new google.maps.InfoWindow();
+    //  places = new google.maps.places.PlacesService(map);
+    //  places.nearbySearch(request, callback);
+    // }
+    // function callback(results, status) {
+  //      if (status == google.maps.places.PlacesServiceStatus.OK) {
+  //        for (var i = 0; i < results.length; i++) {
+  //            var place = results[i];
+  //            alert(place);
+  //            createMarker(results[i]);
+  //        }
+  //      }
+  //    }
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZT8Ai4KniCOkM6VBcku_XvjD3SpRRbFc&callback=initMap&libraries=places">

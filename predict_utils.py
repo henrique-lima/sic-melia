@@ -18,7 +18,6 @@ class Predict_Utils:
 		events = []
 
 		for res in self.phq.events.search(category="concerts", within=gps_coords, limit=50, start=dt):
-			print(res['start'])
 			id = res['id']	
 			title = res['title']
 			category = res['category']
@@ -31,12 +30,4 @@ class Predict_Utils:
 			state = res['state']
 			events.append(Event(id, title, category, labels, rank, start, end, location, address, state))
 
-		print(events)
-
 		return events
-
-class HqDate:
-	def __init__(self, gte, lte):
-		self.name = name
-		self.uri = uri
-		self.genres = genres
